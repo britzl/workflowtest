@@ -21,7 +21,7 @@ env:
 jobs:
   pre-check:
     if: |
-      "!contains(github.event.head_commit.message, 'skip-ci')" &&
+      !contains(github.event.head_commit.message, 'skip-ci') &&
       (github.event_name != 'pull_request_target' || (github.event_name == 'pull_request_target' && contains(github.event.pull_request.labels.*.name, 'ok to test')))
     runs-on: ubuntu-18.04
     steps: [
