@@ -1,0 +1,52 @@
+name: Test
+
+on:
+  push:
+     branches:
+       - '*'
+  pull_request:
+     branches:
+       - '*'
+  pull_request_target:
+     branches:
+       - '*'
+     types: [labeled]
+  repository_dispatch: {}
+  workflow_dispatch: {}
+
+env:
+  FOO_SECRET: ${{ secrets.FOO_SECRET }}
+
+
+jobs:
+  pre-check:
+    if: >
+      "!contains(github.event.head_commit.message, 'skip-ci')" &&
+      (github.event_name != 'pull_request_target' || (github.event_name == 'pull_request_target' && contains(github.event.pull_request.labels.*.name, 'ok to test')))
+    runs-on: ubuntu-18.04
+    steps: [
+      {
+        name: 'Post build',
+        shell: bash,
+        run: 'echo "PRE BUILD ${FOO_SECRET}"'
+      }]
+
+  build:
+    needs: [pre-check]
+    runs-on: ubuntu-18.04
+    steps: [
+      {
+        name: 'Build',
+        shell: bash,
+        run: 'echo "BUILD ${FOO_SECRET}"'
+      }]
+
+  post-build:
+    needs: [build]
+    runs-on: ubuntu-18.04
+    steps: [
+      {
+        name: 'Post build',
+        shell: bash,
+        run: 'echo "POST BUILD ${FOO_SECRET}"'
+      }]
