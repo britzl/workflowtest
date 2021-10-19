@@ -21,6 +21,7 @@ env:
 
 jobs:
   log:
+    runs-on: ubuntu-18.04
     steps: [
       {
         name: 'Post build',
