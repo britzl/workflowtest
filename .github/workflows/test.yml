@@ -16,10 +16,18 @@ on:
 
 env:
   FOO_SECRET: ${{ secrets.FOO_SECRET }}
-
+  EVENT_NAME: ${{ github.event_name }}
 
 
 jobs:
+  pre-check:
+    steps: [
+      {
+        name: 'Post build',
+        shell: bash,
+        run: 'echo "EVENT_NAME ${EVENT_NAME}"'
+      }]
+
   pre-check:
     if: |
       !contains(github.event.head_commit.message, 'skip-ci') &&
