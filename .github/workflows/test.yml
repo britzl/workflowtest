@@ -20,7 +20,7 @@ env:
 
 
 jobs:
-  pre-check:
+  log:
     steps: [
       {
         name: 'Post build',
