@@ -16,6 +16,7 @@ jobs:
   branchname:
     runs-on: ubuntu-18.04
     steps: [
+      { name: 'Checkout', uses: actions/checkout@v2 },
       {
         name: 'Branch name',
         shell: bash,
