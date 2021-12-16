@@ -20,5 +20,5 @@ jobs:
       {
         name: 'Branch name',
         shell: bash,
-        run: 'echo "GITHUB_REF_NAME = ${GITHUB_REF_NAME} GH_HEAD_REF = ${GH_HEAD_REF} GH_REF = ${GH_REF}"'
+        run: 'echo "GITHUB_REF_NAME = ${GITHUB_REF_NAME} GH_HEAD_REF = ${GH_HEAD_REF} GH_REF = ${GH_REF} - WAGGA"'
       }]
